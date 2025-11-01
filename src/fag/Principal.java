@@ -11,7 +11,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		popularVagas();
-		mostrarVagas();
+		menu();
 	}
 	
 	public static void popularVagas() {
@@ -25,7 +25,7 @@ public class Principal {
 
 	public static void mostrarVagas() {
 		for(int i=0; i<vagas.size(); i++) {
-			System.out.printf("\n%n - ", i + 1);
+			System.out.printf("\n %d - ", i+1);
 			vagas.get(i).carro();
 		}
 		System.out.println("\n");
@@ -41,6 +41,28 @@ public class Principal {
 		System.out.println("Entre com o Cor do Veiculo");
 		carro.setCor(scan.nextLine());
 		vagas.add(carro);
+		System.out.println("Cadastro Realizado com Sucesso!");
+	}
+	
+	public static void alterarCarro() {
+		mostrarVagas();
+		System.out.println("Selecione o carro a ser alterado");
+		int choice = scan.nextInt();
+		scan.nextLine();
+		if(choice-1>=0 && choice-1<vagas.size()) {
+			Carros carro = vagas.get(choice-1);
+			System.out.println("Entre com o Modelo do Veiculo");
+			carro.setModelo(scan.nextLine());
+			System.out.println("Entre com o Ano do Veiculo");
+			carro.setAno(scan.nextInt());
+			scan.nextLine();
+			System.out.println("Entre com o Cor do Veiculo");
+			carro.setCor(scan.nextLine());
+			vagas.set(choice-1, carro);
+			System.out.println("Alteração Realizado com Sucesso!");
+		} else {
+			System.out.println("Opção Invalida, por favor tente novamente");
+		}
 	}
 	
 	public static void menu() {
@@ -71,14 +93,30 @@ public class Principal {
 			mostrarVagas();
 			break;
 		case 3:
-			
+			alterarCarro();
 			break;
 		case 4:
-			
+			removerVeiculo();
 			break;
 		default:
 			System.out.println("Opção Invalida, por favor tente novamente");
 			break;
+		}
+	}
+
+	private static void removerVeiculo() {
+		System.out.println("0 - Cancelar operação");
+		mostrarVagas();
+		System.out.println("Selecione o carro a ser removido");
+		int choice = scan.nextInt();
+		scan.nextLine();
+		if(choice-1>=0 && choice-1<vagas.size()) {
+			vagas.remove(choice-1);
+			System.out.println("Veiculo Removido com Sucesso!");
+		} else if(choice-1 == -1) {
+			System.out.println("Operação Cancelada");
+		} else {
+			System.out.println("Opção Invalida, por favor tente novamente");
 		}
 	}
 }
