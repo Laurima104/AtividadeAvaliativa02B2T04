@@ -74,6 +74,8 @@ public class Principal {
 			System.out.println("2 - Mostrar Veiculos");
 			System.out.println("3 - Atualizar Veiculos");
 			System.out.println("4 - Remover Veiculo");
+			System.out.println("5 - Filtrar por Modelo");
+			System.out.println("6 - Filtrar por Cor");
 			System.out.println("Selecione a opção desejada");
 			opt = scan.nextInt();
 			scan.nextLine();
@@ -98,12 +100,42 @@ public class Principal {
 		case 4:
 			removerVeiculo();
 			break;
+		case 5:
+			filtrarModelo();
+			break;
+		case 6:
+			filtrarCor();
+			break;
 		default:
 			System.out.println("Opção Invalida, por favor tente novamente");
 			break;
 		}
 	}
+	
+	private static void filtrarModelo() {
+		System.out.println("Digite o Modelo que deseja filtrar da lista");
+		String model = scan.nextLine();
+		for(int i=0; i<vagas.size(); i++) {
+			if(vagas.get(i).getModelo().equals(model)) {
+				System.out.printf("\n %d - ", i+1);
+				vagas.get(i).carro();
+			}
+		}
+		System.out.println("\n");
+	}
 
+	private static void filtrarCor() {
+		System.out.println("Digite a Cor que deseja filtrar da lista");
+		String color = scan.nextLine();
+		for(int i=0; i<vagas.size(); i++) {
+			if(vagas.get(i).getCor().equals(color)) {
+				System.out.printf("\n %d - ", i+1);
+				vagas.get(i).carro();
+			}
+		}
+		System.out.println("\n");
+	}
+	
 	private static void removerVeiculo() {
 		System.out.println("0 - Cancelar operação");
 		mostrarVagas();
